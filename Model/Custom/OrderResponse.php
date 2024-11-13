@@ -34,19 +34,24 @@ class OrderResponse
             'payment/payplus_gateway/api_configuration/state_order_payplus',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
-        $this->stateApprovalOGlobal = $this->config->getValue(
+        $this->stateApprovalOGlobal = !empty($this->config->getValue(
             'payment/payplus_gateway/api_configuration/state_approval_order_payplus',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-        $this->statusApprovalGlobal = $this->config->getValue(
+        )) ? $this->config->getValue(
+            'payment/payplus_gateway/api_configuration/state_approval_order_payplus',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        ) : 'processing';
+        $this->statusApprovalGlobal = !empty($this->config->getValue(
             'payment/payplus_gateway/api_configuration/status_approval_order_payplus',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        )) ? $this->config->getValue(
+            'payment/payplus_gateway/api_configuration/status_approval_order_payplus',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        ) : 'holded';
         $this->stateOGlobal = ($this->stateOGlobal) ?  $this->stateOGlobal : 'complete';
     }
     public function processResponse($params, $direct = false)
     {
-
         $payment = $this->order->getPayment();
         $status = false;
         /* if (!$direct) {
