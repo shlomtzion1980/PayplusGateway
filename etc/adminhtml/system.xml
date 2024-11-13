@@ -1,0 +1,385 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="payplus_gateway" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>PayPlus - Payment Gateway ( 1.1.0 ) </label>
+
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+
+                <group id="api_configuration" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>API configuration</label>
+
+                    <field id="dev_mode" translate="label" type="select" sortOrder="32" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sandbox mode</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="payment_page_uid" translate="label" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Page UID</label>
+                    </field>
+                    <field id="api_key" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>api_key__</label>
+                    </field>
+                    <field id="secret_key" translate="label" type="password" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>api_secret__</label>
+                    </field>
+
+
+                    <field id="enable_cc_vault" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable Credit card vault storage</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/payplus_cc_vault/active</config_path>
+                    </field>
+                    <field id="enable_cc_vault_always" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Always enable credit card vault storage</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/payplus_enable_cc_vault_always/active</config_path>
+                    </field>
+                    <field id="status_order_payplus" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Charge order status complete </label>
+                        <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                    </field>
+                    <field id="state_order_payplus" translate="label comment" type="select" sortOrder="41" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Charge order state complete </label>
+                        <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                    </field>
+                    <field id="status_approval_order_payplus" translate="label comment" type="select" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Approval order status approved </label>
+                        <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                    </field>
+                    <field id="state_approval_order_payplus" translate="label comment" type="select" sortOrder="43" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Approval order state approved </label>
+                        <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                    </field>
+                </group>
+                <group id="display_settings" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>Display settings</label>
+                    <field id="iframe_or_redirect" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment form</label>
+                        <source_model>Payplus\PayplusGateway\Model\Adminhtml\Source\IframeOrRedirect</source_model>
+
+                    </field>
+                    <field id="iframe_height" translate="label" type="text"  sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Iframe height</label>
+                        <validate>integer</validate>
+                        <depends>
+                            <field id="iframe_or_redirect">iframe</field>
+                        </depends>
+                    </field>
+                    <field id="import_applepay_script" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Include Apple Pay Script in Iframe Mode (You have to join the service before)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="iframe_or_redirect">iframe</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="payment_page" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>Payment page</label>
+                    <field id="hide_payplus_icon" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hide the Payplus logo in cart</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="use_callback" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Use Callback</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <frontend_model>Payplus\PayplusGateway\Block\System\Config\Form\Field\Disable</frontend_model>
+                    </field>
+                    <field id="test_url_callback" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label> Url text callback</label>
+                    </field>
+                    <field id="success_page_action" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Success redirect</label>
+                        <source_model>Payplus\PayplusGateway\Model\Adminhtml\Source\TerminalMagentoCustom</source_model>
+                        <depends>
+                            <field id="use_callback">1</field>
+                        </depends>
+                    </field>
+                    <field id="success_page_custom_url" translate="label" type="text"  sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Custom success URL</label>
+                        <depends>
+                            <field id="success_page_action">2</field>
+                        </depends>
+                    </field>
+                    <field id="error_page_action" translate="label" type="select" sortOrder="23" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Error redirect</label>
+                        <source_model>Payplus\PayplusGateway\Model\Adminhtml\Source\TerminalMagentoCustom</source_model>
+                    </field>
+                    <field id="error_page_custom_url" translate="label" type="text"  sortOrder="24" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Error success URL</label>
+                        <depends>
+                            <field id="error_page_action">2</field>
+                        </depends>
+                    </field>
+                    <field id="cancel_page_action" translate="label" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Cancel redirect</label>
+                        <source_model>Payplus\PayplusGateway\Model\Adminhtml\Source\TerminalMagentoCustom</source_model>
+                    </field>
+                    <field id="cancel_page_custom_url" translate="label" type="text"  sortOrder="26" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Cancel success URL</label>
+                        <depends>
+                            <field id="cancel_page_action">2</field>
+                        </depends>
+                    </field>
+                    <field id="send_add_data_param" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Send Add Data parameter</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                   <field id="hide_id_card_number" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hide ID card number on payment page</label>
+                        <source_model>Payplus\PayplusGateway\Model\Adminhtml\Source\DefaultOrHide</source_model>
+                    </field>
+                   <field id="hide_payments" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hide payments field</label>
+                        <source_model>Payplus\PayplusGateway\Model\Adminhtml\Source\DefaultOrHide</source_model>
+                    </field>
+                </group>
+                <group id="orders_config" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>Order configuration</label>
+                    <field id="payment_action" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Charge Method</label>
+                        <source_model>Payplus\PayplusGateway\Model\Adminhtml\Source\PaymentAction</source_model>
+                    </field>
+                    <field id="email_upon_success" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Send email notification from the Payplus system upon successful transaction</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="email_upon_fail" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Send email notification from the Payplus system upon failed transaction</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="debug_payplus_orders" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Debug payplus orders</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <frontend_model>Payplus\PayplusGateway\Block\System\Config\Form\Field\Disable</frontend_model>
+                    </field>
+                </group>
+                <group id="invoices_config" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>Invoices configuration</label>
+                    <field id="invoice_language_same_as_terminal" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Request invoice in the same language as the terminal</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="no_vat_if_set_to_no_vat" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Set invoice to Tax exempt based on Magento's tax settings</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+            </group>
+            <group id="payplus_gateway_bit" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>PayPlus - Payment Gateway bit</label>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="display_settings" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>Display settings</label>
+                    <field id="iframe_or_redirect" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment form</label>
+                        <source_model>Payplus\PayplusGateway\Model\Adminhtml\Source\IframeOrRedirect</source_model>
+
+                    </field>
+                    <field id="iframe_height" translate="label" type="text"  sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Iframe height</label>
+                        <validate>integer</validate>
+                        <depends>
+                            <field id="iframe_or_redirect">iframe</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="payment_page" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>Payment page</label>
+                    <field id="hide_payplus_icon" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hide the Payplus logo in cart</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="hide_other_paymnet" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hide other payment types on payment page</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+
+            </group>
+            <group id="payplus_gateway_google_pay" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>PayPlus - Payment Gateway Google Pay</label>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="display_settings" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>Display settings</label>
+                    <field id="iframe_or_redirect" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment form</label>
+                        <source_model>Payplus\PayplusGateway\Model\Adminhtml\Source\IframeOrRedirect</source_model>
+
+                    </field>
+                    <field id="iframe_height" translate="label" type="text"  sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Iframe height</label>
+                        <validate>integer</validate>
+                        <depends>
+                            <field id="iframe_or_redirect">iframe</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="payment_page" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>Payment page</label>
+                    <field id="hide_payplus_icon" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hide the Payplus logo in cart</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="hide_other_paymnet" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hide other payment types on payment page</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+
+            </group>
+            <group id="payplus_gateway_apple_pay" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>PayPlus - Payment Gateway Apple Pay</label>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="display_settings" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>Display settings</label>
+                    <field id="iframe_or_redirect" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment form</label>
+                        <source_model>Payplus\PayplusGateway\Model\Adminhtml\Source\IframeOrRedirect</source_model>
+
+                    </field>
+                    <field id="iframe_height" translate="label" type="text"  sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Iframe height</label>
+                        <validate>integer</validate>
+                        <depends>
+                            <field id="iframe_or_redirect">iframe</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="payment_page" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>Payment page</label>
+                    <field id="hide_payplus_icon" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hide the Payplus logo in cart</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="hide_other_paymnet" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hide other payment types on payment page</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+
+            </group>
+            <group id="payplus_gateway_multipass" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>PayPlus - Payment Gateway MULTIPASS</label>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="display_settings" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>Display settings</label>
+                    <field id="iframe_or_redirect" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment form</label>
+                        <source_model>Payplus\PayplusGateway\Model\Adminhtml\Source\IframeOrRedirect</source_model>
+
+                    </field>
+                    <field id="iframe_height" translate="label" type="text"  sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Iframe height</label>
+                        <validate>integer</validate>
+                        <depends>
+                            <field id="iframe_or_redirect">iframe</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="payment_page" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>Payment page</label>
+                    <field id="hide_payplus_icon" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hide the Payplus logo in cart</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="hide_other_paymnet" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hide other payment types on payment page</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+
+            </group>
+            <group id="payplus_gateway_paypal" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>PayPlus - Payment Gateway PayPal</label>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="display_settings" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>Display settings</label>
+                    <field id="iframe_or_redirect" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment form</label>
+                        <source_model>Payplus\PayplusGateway\Model\Adminhtml\Source\IframeOrRedirect</source_model>
+
+                    </field>
+                    <field id="iframe_height" translate="label" type="text"  sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Iframe height</label>
+                        <validate>integer</validate>
+                        <depends>
+                            <field id="iframe_or_redirect">iframe</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="payment_page" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <attribute type="expanded">1</attribute>
+                    <label>Payment page</label>
+                    <field id="hide_payplus_icon" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hide the Payplus logo in cart</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="hide_other_paymnet" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hide other payment types on payment page</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+
+            </group>
+
+        </section>
+    </system>
+</config>
