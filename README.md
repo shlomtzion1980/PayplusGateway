@@ -4,7 +4,7 @@ Tags: Payment Gateway, Credit Cards, Charges and Refunds, PayPlus, Subscriptions
 Requires at least: 3.0.1
 Tested up to: 7.4
 Requires PHP: 7.4
-Stable tag:1.1.0
+Stable tag:1.1.1
 PlugIn URL: https://www.payplus.co.il/magento
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -25,4 +25,3 @@ Once complete, head to the admin panel/payment methods of your Magento 2 install
 - Stores - Configuration - Sales - Payment methods.
 
 Locate the PayPlus configuration section where you can enable, add credentials and customize the behavior of the extension.
-# PayplusGateway
