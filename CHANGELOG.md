@@ -10,6 +10,9 @@
     - Default status for new orders created in J5 is now **Processing**.
     - Default status for new orders approved in J5 is now **On-Hold**.
 
+### Changed
+- Removed check for product types in BaseOrderRequest.php - unclear why it was done.
+
 ## [1.1.0] - 2024-09-19
 ### Fixed
 - Minor bug fixes - Fixed depreceated errors.
