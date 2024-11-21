@@ -240,7 +240,7 @@ class Vault implements VaultPaymentInterface
      */
     public function canCapturePartial()
     {
-        return true;
+        return false;
     }
 
     /**
