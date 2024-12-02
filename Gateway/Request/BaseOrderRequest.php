@@ -48,7 +48,9 @@ abstract class BaseOrderRequest implements BuilderInterface
 
         $order = $payment->getOrder();
 
-        $address = $order->getShippingAddress();
+        $customer = $this->customerSession->getCustomer();
+        $address = $customer->getDefaultBillingAddress();
+
         $quote = $this->session->getQuote();
         $paymentMethod = $quote->getPayment()->getMethodInstance()->getCode();
         $public_hash = $quote->getPayment()->getAdditionalInformation('public_hash');
